@@ -1,6 +1,7 @@
 package com.sqlite;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
     EditText etWord, etMeaning;
     Button btnAdWord;
+    Button btnShowWords;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         etWord =findViewById(R.id.etWord);
         etMeaning = findViewById(R.id.etMeaning);
         btnAdWord = findViewById(R.id.btnAddWord);
+        btnShowWords= findViewById(R.id.btnShowWords);
 
         final MyHelper myHelper = new MyHelper(this);
         final SQLiteDatabase sqLiteDatabase = myHelper.getWritableDatabase();
@@ -39,6 +42,14 @@ public class MainActivity extends AppCompatActivity {
                 else {
                     Toast.makeText(MainActivity.this,"Error please check",Toast.LENGTH_LONG).show();
                 }
+            }
+        });
+
+        btnShowWords.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Display_Word.class);
+                startActivity(intent);
             }
         });
 

@@ -8,12 +8,36 @@
     tools:context=".Display_Word">
 
 
+    <EditText
+        android:id="@+id/etSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Word"
+        android:textSize="20dp"/>
+
+    <Button
+        android:id="@+id/btnSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Search"
+        android:textSize="20dp"
+        />
+
+    <Button
+        android:id="@+id/btnBack"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        android:textSize="20dp"
+        />
+
     <ListView
-        android:id="@+id/lsWords"
+        android:id="@+id/lstWord"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
     </ListView>
+
+
 
 </LinearLayout>

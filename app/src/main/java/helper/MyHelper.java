@@ -53,17 +53,27 @@ public class MyHelper extends SQLiteOpenHelper {
         return id;
     }
 
-    public List<Word> GetAllWords(SQLiteDatabase db) {
+    public List<Word> GetAllWords (SQLiteDatabase db){
         List<Word> dictionaryList = new ArrayList<>();
-        String[] colums = {WordID, Word, Meaning};
-        Cursor cursor = db.query(tblWord, colums, null, null, null, null, null);
+        Cursor cursor = db.rawQuery("select * from tblWord", null);
 
-        if (cursor.getCount() > 0) {
-
-            while (cursor.moveToNext()) {
+        if(cursor.getCount() > 0){
+            while (cursor.moveToNext()){
                 dictionaryList.add(new Word(cursor.getInt(0), cursor.getString(1), cursor.getString(2)));
             }
         }
         return dictionaryList;
     }
+
+    public List<Word> GetWordByName (String word, SQLiteDatabase db){
+        List<Word> dictionaryList = new ArrayList<>();
+        Cursor cursor = db.rawQuery("Select * from tblWord where Word like '"+word+"%'", null);
+        if ((cursor.getCount()>0)){
+            while (cursor.moveToNext()){
+                dictionaryList.add(new Word(cursor.getInt(0), cursor.getString(1), cursor.getString(2)));
+            }
+        }
+        return dictionaryList;
+    }
+
 }

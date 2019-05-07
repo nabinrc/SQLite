@@ -3,7 +3,10 @@ package com.sqlite;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -16,6 +19,8 @@ import model.Word;
 public class Display_Word extends AppCompatActivity {
 
     private ListView lstWord;
+    private EditText etSearch;
+    private Button btnSearch;
 
 
     @Override
@@ -23,8 +28,18 @@ public class Display_Word extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display__word);
 
-        lstWord = findViewById(R.id.lsWords);
-        LoadWord();
+        etSearch=findViewById(R.id.etSearch);
+        btnSearch = findViewById(R.id.btnSearch);
+
+        lstWord = findViewById(R.id.lstWord);
+
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LoadWord();
+            }
+        });
+
 
 
     }
@@ -35,7 +50,8 @@ public class Display_Word extends AppCompatActivity {
         final SQLiteDatabase sqLiteDatabase = myHelper.getWritableDatabase();
 
         List<Word> wordList = new ArrayList<>();
-        wordList = myHelper.GetAllWords(sqLiteDatabase);
+//        wordList = myHelper.GetAllWords(sqLiteDatabase);
+        wordList = myHelper.GetWordByName(etSearch.getText().toString(),sqLiteDatabase);
 
         HashMap<String, String> hashMap = new HashMap<>();
 
